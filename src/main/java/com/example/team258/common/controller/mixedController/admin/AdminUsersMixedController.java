@@ -4,6 +4,10 @@ import com.example.team258.domain.member.dto.UserResponseDto;
 import com.example.team258.common.entity.User;
 import com.example.team258.common.repository.UserRepository;
 import com.example.team258.common.service.UserService;
+import com.example.team258.kafka.KafkaProducerService;
+import com.example.team258.kafka.dto.AdminUserManagemetKafkaDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +24,8 @@ import java.util.stream.Collectors;
 public class AdminUsersMixedController {
     private final UserRepository userRepository;
     private final UserService userService;
+    private final KafkaProducerService producer;
+
 //    @GetMapping("/admin/users")
 //    public String adminView(@RequestParam(defaultValue = "0") int page, Model model) {
 //
@@ -47,11 +53,20 @@ public class AdminUsersMixedController {
      * @RequestParam(defaultValue = "0") int page : page 파라미터가 없으면 0으로 설정
      */
     public String adminViewV2(@RequestParam(defaultValue = "0") int page, Model model, @RequestParam(defaultValue = "") String userName
-            ,@RequestParam(defaultValue = "") String userRole, @RequestParam(defaultValue = "5") int pageSize ) {
+            ,@RequestParam(defaultValue = "") String userRole, @RequestParam(defaultValue = "5") int pageSize ) throws JsonProcessingException {
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        AdminUserManagemetKafkaDto adminUserManagemetKafkaDto = new AdminUserManagemetKafkaDto(userName, userRole, page, pageSize);
+        String jsonString = objectMapper.writeValueAsString(adminUserManagemetKafkaDto);
+
+        producer.sendMessage("bookDonationEventApplyInput",jsonString);
+
 
         Page<User> users = userService.findUsersByUsernameAndRoleV1(userName, userRole, PageRequest.of(page, pageSize));
-
         List<UserResponseDto> userResponseDtos = users.stream().map(UserResponseDto::new).collect(Collectors.toList());
+
 
         model.addAttribute("currentPage", page);  // 현재 페이지 번호 추가
         model.addAttribute("totalPages", users.getTotalPages());
