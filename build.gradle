@@ -94,6 +94,8 @@ dependencies {
 	implementation 'org.springframework.kafka:spring-kafka'
 	implementation 'org.apache.kafka:kafka-clients'
 
+	// json Trouble Shooting
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.5'
 }
 
 tasks.named('test') {
