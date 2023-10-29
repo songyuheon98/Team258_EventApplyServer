@@ -12,6 +12,7 @@ public class UserResponseKafkaDto {
     private List<UserResponseDto> userResponseDtos;
     private int page;
     private int totalPages;
+    private String correlationId;
     public UserResponseKafkaDto(List<UserResponseDto> userResponseDtos, int page, int totalPages) {
         this.userResponseDtos = userResponseDtos;
         this.page = page;

@@ -22,7 +22,7 @@ public class KafkaConfig {
         // 카프카 서버의 주소를 설정합니다.
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         // 컨슈머 그룹의 ID를 설정합니다.
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "event-apply-Output-consumer-group");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "user-management-output-consumer-group");
         // 메시지의 키와 값에 사용할 직렬화 클래스를 설정합니다.
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);

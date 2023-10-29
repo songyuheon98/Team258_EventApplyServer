@@ -19,22 +19,18 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class KafkaConsumerController {
-    private final Model model;
-    @KafkaListener(topics = "bookDonationEventApplyOutput", groupId = "bookDonationEventApplyOutputConsumerGroup")
-    public String AdminUserManagementConsumer(String message) throws JsonProcessingException {
-
-        System.out.println("Received Message in group 'test-consumer-group': " + message);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        UserResponseKafkaDto userResponseDtos = objectMapper.readValue(message, UserResponseKafkaDto.class);
-        userResponseDtos.getUserResponseDtos().forEach(System.out::println);
-
-        model.addAttribute("currentPage", userResponseDtos.getPage());  // 현재 페이지 번호 추가
-        model.addAttribute("totalPages", userResponseDtos.getTotalPages());
-        model.addAttribute("users", userResponseDtos);
-
-        return "adminV2";
-    }
+//    @KafkaListener(topics = "bookDonationEventApplyOutput", groupId = "bookDonationEventApplyOutputConsumerGroup")
+//    public String AdminUserManagementConsumer(String message) throws JsonProcessingException {
+//
+//        System.out.println("Received Message in group 'test-consumer-group': " + message);
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        UserResponseKafkaDto userResponseDtos = objectMapper.readValue(message, UserResponseKafkaDto.class);
+//        userResponseDtos.getUserResponseDtos().forEach(System.out::println);
+//
+//
+//        return "adminV2";
+//    }
 
 }
