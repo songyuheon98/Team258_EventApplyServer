@@ -35,6 +35,10 @@ public class BookApplyDonationController {
         }
     }
 
+
+
+
+
     @DeleteMapping("/bookApplyDonation/{applyId}")
     public ResponseEntity<MessageDto> deleteBookApplyDonation(@PathVariable Long applyId){
 

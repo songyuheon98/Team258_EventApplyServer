@@ -33,6 +33,23 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(config);
     }
 
+    @Bean
+    public ConsumerFactory<String, String> consumerFactory2() {
+        // 카프카 컨슈머의 설정값을 담을 Map을 생성합니다.
+        Map<String, Object> config = new HashMap<>();
+        // 카프카 서버의 주소를 설정합니다.
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        // 컨슈머 그룹의 ID를 설정합니다.
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "user-event-apply-output-consumer-group");
+        // 메시지의 키와 값에 사용할 직렬화 클래스를 설정합니다.
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+
+        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+
+        // 설정값을 사용해 DefaultKafkaConsumerFactory 인스턴스를 생성하여 반환합니다.
+        return new DefaultKafkaConsumerFactory<>(config);
+    }
     /**
      * KafkaListenerContainerFactory
      * KafkaListenerContainerFactory는 KafkaListenerContainer를 생성하는 팩토리입니다.
@@ -46,6 +63,16 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         // 앞서 정의한 컨슈머 팩토리를 설정합니다.
         factory.setConsumerFactory(consumerFactory1());
+        // 팩토리 인스턴스를 반환합니다.
+        return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory2() {
+        // ConcurrentKafkaListenerContainerFactory 인스턴스를 생성합니다.
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        // 앞서 정의한 컨슈머 팩토리를 설정합니다.
+        factory.setConsumerFactory(consumerFactory2());
         // 팩토리 인스턴스를 반환합니다.
         return factory;
     }
