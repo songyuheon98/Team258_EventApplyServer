@@ -42,52 +42,7 @@ public class BookApplyDonationController {
     private final Map<String, CompletableFuture<MessageKafkaDto>> futures = new ConcurrentHashMap<>();
     private ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
-//    private final Lock lock=new ReentrantLock();
-//    @PostMapping("/bookApplyDonation")
-//    public ResponseEntity<MessageDto> createBookApplyDonation2(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto){
-//        try{
-//            lock.lock();
-//            return ResponseEntity.ok().body(bookApplyDonationService.createBookApplyDonation(bookApplyDonationRequestDto));
-//        }
-//        finally {
-//            lock.unlock();
-//        }
-//    }
-//    @PostMapping("/bookApplyDonation")
-//    public ResponseEntity<MessageDto> createBookApplyDonation(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto)
-//            throws JsonProcessingException, ExecutionException, InterruptedException {
-//
-//        UserEventApplyKafkaDto userEventApplyKafkaDto = new UserEventApplyKafkaDto(bookApplyDonationRequestDto,
-//                SecurityUtil.getPrincipal().get().getUserId());
-//        String correlationId = UUID.randomUUID().toString();
-//        userEventApplyKafkaDto.setCorrelationId(correlationId);
-//
-//        String jsonString = objectMapper.writeValueAsString(userEventApplyKafkaDto);
-//
-//        CompletableFuture<MessageKafkaDto> future = new CompletableFuture<>();
-//
-//        futures.put(correlationId, future);
-//
-//        producer.sendMessage("user-event-apply-input-topic", jsonString);
-//
-//        MessageKafkaDto messageKafkaDto = future.get(); // 결과를 기다립니다.
-//
-//
-//        return ResponseEntity.ok().body(messageKafkaDto.getMessageDto());
-//    }
-//    @KafkaListener(topics = "user-event-apply-output-topic", groupId = "user-event-apply-output-consumer-group")
-//    public void AdminUserManagementConsumer(String message) throws JsonProcessingException {
-//
-//        MessageKafkaDto messageKafkaDto = objectMapper.readValue(message, MessageKafkaDto.class);
-//
-//        CompletableFuture<MessageKafkaDto> future = futures.get(messageKafkaDto.getCorrelationId());
-//
-//        if (future != null) {
-//            future.complete(messageKafkaDto);
-//        }
-//    }
-
-
+    private final Semaphore semaphore;
 
     @DeleteMapping("/bookApplyDonation/{applyId}")
     public ResponseEntity<MessageDto> deleteBookApplyDonation(@PathVariable Long applyId){
@@ -100,15 +55,47 @@ public class BookApplyDonationController {
      * @param bookStatus
      * @return
      */
-    @GetMapping("/bookApplyDonation/books")
-    public ResponseEntity<List<BookResponseDto>> getDonationBooks(@RequestParam BookStatusEnum bookStatus){
-        return ResponseEntity.ok().body(bookApplyDonationService.getDonationBooks(bookStatus));
+    private final Lock lock=new ReentrantLock();
+
+    @PostMapping("/bookApplyDonation")
+    public ResponseEntity<MessageDto> createBookApplyDonation(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto){
+        try{
+            lock.lock();
+            return ResponseEntity.ok().body(bookApplyDonationService.createBookApplyDonation(bookApplyDonationRequestDto));
+        }
+        finally {
+            lock.unlock();
+        }
     }
 
-    @GetMapping("/bookApplyDonation")
-    public ResponseEntity<List<BookApplyDonationResponseDto>> getBookApplyDonations(){
-        return ResponseEntity.ok().body(bookApplyDonationService.getBookApplyDonations());
+    @PostMapping("/bookApplyDonation/semaphore")
+    public ResponseEntity<MessageDto> createBookApplyDonationSemaphore(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto){
+        try{
+            semaphore.acquire();
+            return ResponseEntity.ok().body(bookApplyDonationService.createBookApplyDonation(bookApplyDonationRequestDto));
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(new MessageDto("나눔 신청에 실패했습니다."));
+        }finally {
+            semaphore.release();
+        }
+    }
+    //낙관적락,비관적락 사용시
+    @PostMapping("/bookApplyDonation/v2")
+    public ResponseEntity<MessageDto> createBookApplyDonationV2(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto){
+        return ResponseEntity.ok().body(bookApplyDonationService.createBookApplyDonationV2(bookApplyDonationRequestDto));
     }
 
+    //Transactional SERIALIZable 사용
+    @PostMapping("/bookApplyDonation/v3")
+    public ResponseEntity<MessageDto> createBookApplyDonationV3(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto){
+        return ResponseEntity.ok().body(bookApplyDonationService.createBookApplyDonationV3(bookApplyDonationRequestDto));
+    }
+
+//    //redisson 분산락 사용
+//    @PostMapping("/bookApplyDonation/v4")
+//    public ResponseEntity<MessageDto> createBookApplyDonationV4(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto){
+//        return ResponseEntity.ok().body(bookApplyDonationService.createBookApplyDonationV4(bookApplyDonationRequestDto));
+//    }
 }
 
