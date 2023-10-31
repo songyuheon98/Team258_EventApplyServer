@@ -53,39 +53,39 @@ public class BookApplyDonationController {
 //            lock.unlock();
 //        }
 //    }
-    @PostMapping("/bookApplyDonation")
-    public ResponseEntity<MessageDto> createBookApplyDonation(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto)
-            throws JsonProcessingException, ExecutionException, InterruptedException {
-
-        UserEventApplyKafkaDto userEventApplyKafkaDto = new UserEventApplyKafkaDto(bookApplyDonationRequestDto,
-                SecurityUtil.getPrincipal().get().getUserId());
-        String correlationId = UUID.randomUUID().toString();
-        userEventApplyKafkaDto.setCorrelationId(correlationId);
-
-        String jsonString = objectMapper.writeValueAsString(userEventApplyKafkaDto);
-
-        CompletableFuture<MessageKafkaDto> future = new CompletableFuture<>();
-
-        futures.put(correlationId, future);
-
-        producer.sendMessage("user-event-apply-input-topic", jsonString);
-
-        MessageKafkaDto messageKafkaDto = future.get(); // 결과를 기다립니다.
-
-
-        return ResponseEntity.ok().body(messageKafkaDto.getMessageDto());
-    }
-    @KafkaListener(topics = "user-event-apply-output-topic", groupId = "user-event-apply-output-consumer-group")
-    public void AdminUserManagementConsumer(String message) throws JsonProcessingException {
-
-        MessageKafkaDto messageKafkaDto = objectMapper.readValue(message, MessageKafkaDto.class);
-
-        CompletableFuture<MessageKafkaDto> future = futures.get(messageKafkaDto.getCorrelationId());
-
-        if (future != null) {
-            future.complete(messageKafkaDto);
-        }
-    }
+//    @PostMapping("/bookApplyDonation")
+//    public ResponseEntity<MessageDto> createBookApplyDonation(@RequestBody BookApplyDonationRequestDto bookApplyDonationRequestDto)
+//            throws JsonProcessingException, ExecutionException, InterruptedException {
+//
+//        UserEventApplyKafkaDto userEventApplyKafkaDto = new UserEventApplyKafkaDto(bookApplyDonationRequestDto,
+//                SecurityUtil.getPrincipal().get().getUserId());
+//        String correlationId = UUID.randomUUID().toString();
+//        userEventApplyKafkaDto.setCorrelationId(correlationId);
+//
+//        String jsonString = objectMapper.writeValueAsString(userEventApplyKafkaDto);
+//
+//        CompletableFuture<MessageKafkaDto> future = new CompletableFuture<>();
+//
+//        futures.put(correlationId, future);
+//
+//        producer.sendMessage("user-event-apply-input-topic", jsonString);
+//
+//        MessageKafkaDto messageKafkaDto = future.get(); // 결과를 기다립니다.
+//
+//
+//        return ResponseEntity.ok().body(messageKafkaDto.getMessageDto());
+//    }
+//    @KafkaListener(topics = "user-event-apply-output-topic", groupId = "user-event-apply-output-consumer-group")
+//    public void AdminUserManagementConsumer(String message) throws JsonProcessingException {
+//
+//        MessageKafkaDto messageKafkaDto = objectMapper.readValue(message, MessageKafkaDto.class);
+//
+//        CompletableFuture<MessageKafkaDto> future = futures.get(messageKafkaDto.getCorrelationId());
+//
+//        if (future != null) {
+//            future.complete(messageKafkaDto);
+//        }
+//    }
 
 
 

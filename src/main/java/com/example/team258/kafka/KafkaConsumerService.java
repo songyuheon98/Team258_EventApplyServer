@@ -19,27 +19,10 @@ public class KafkaConsumerService {
     private final KafkaProducerService producer;
     private final BookApplyDonationService bookApplyDonationService;
 
-//    @KafkaListener(topics = "user-management-input-topic", groupId = "user-management-input-consumer-group")
-//    public void AdminUserManagementConsume(String message) throws JsonProcessingException {
-//        System.out.println("Received Message in group 'test-consumer-group1': " + message);
-//
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        AdminUserManagementKafkaDto kafkaDto = objectMapper.readValue(message, AdminUserManagementKafkaDto.class);
-//        Page<User> users = userService.findUsersByUsernameAndRoleV1(kafkaDto.getUserName(), kafkaDto.getUserRole()
-//                , PageRequest.of(kafkaDto.getPage(), kafkaDto.getPageSize()));
-//
-//        List<UserResponseDto> userResponseDtos = users.stream().map(UserResponseDto::new).toList();
-//        UserResponseKafkaDto userResponseKafkaDto = new UserResponseKafkaDto(userResponseDtos, kafkaDto.getPage(),users.getTotalPages()
-//                ,kafkaDto.getCorrelationId());
-//
-//        String jsonString = objectMapper.writeValueAsString(userResponseKafkaDto);
-//        producer.sendMessage("user-management-output-topic", jsonString);
-//
-//    }
 
-    @KafkaListener(topics = "user-event-apply-input-topic", groupId = "user-management-input-consumer-group")
-    public void AdminUserManagementConsume2(String message) throws JsonProcessingException {
+    @KafkaListener(topics = "user-event-apply-input-topic", groupId = "user-event-apply-consumer-group",
+    containerFactory = "kafkaListenerContainerFactory2")
+    public void AdminUserEventApplyConsume2(String message) throws JsonProcessingException {
         System.out.println("Received Message in group 'test-consumer-group2': " + message);
 
         ObjectMapper objectMapper = new ObjectMapper();
