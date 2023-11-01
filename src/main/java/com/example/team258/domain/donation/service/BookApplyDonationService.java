@@ -101,7 +101,9 @@ public class BookApplyDonationService {
 
         MessageDto x1 = getMessageDto(bookDonationEvent);
         if (x1 != null) return x1;
-        User user = getUser();
+        User user = userRepository.findFetchJoinById(userId).orElseThrow(
+                ()->new IllegalArgumentException("해당 사용자는 도서관 사용자가 아닙니다.")
+        );
         BookApplyDonation bookApplyDonation = new BookApplyDonation(bookApplyDonationRequestDto);
         bookApplyDonationRepository.save(bookApplyDonation);
         bookApplyDonation.addBook(book);

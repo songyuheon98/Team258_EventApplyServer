@@ -23,7 +23,7 @@ public class KafkaConsumerService {
     @KafkaListener(topics = "user-event-apply-input-topic", groupId = "user-event-apply-consumer-group",
     containerFactory = "kafkaListenerContainerFactory2")
     public void AdminUserEventApplyConsume2(String message) throws JsonProcessingException {
-        System.out.println("Received Message in group 'test-consumer-group2': " + message);
+//        System.out.println("Received Message in group 'test-consumer-group2': " + message);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
