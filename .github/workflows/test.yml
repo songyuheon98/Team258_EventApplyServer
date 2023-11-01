@@ -9,8 +9,8 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: team258-bucket
-  CODE_DEPLOY_APPLICATION_NAME: team258-codedeploy-app
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: team258-codedeploy-deployment-group
+  CODE_DEPLOY_APPLICATION_NAME: team258-traffic-server-codedeploy-app
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: team258-traffic-server-codedeploy-group
 #  RESOURCE_PATH: ./src/main/resources/application.properties
 
 permissions:
