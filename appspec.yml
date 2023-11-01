@@ -24,6 +24,7 @@ permissions:
     # 파일 또는 디렉터리의 그룹을 정의한다.
     group: ubuntu
 
+
 # 배포 프로세스 도중 실행될 스크립트를 정의한다.
 hooks:
   # AfterInstall 이벤트 시 실행될 스크립트를 지정한다.
