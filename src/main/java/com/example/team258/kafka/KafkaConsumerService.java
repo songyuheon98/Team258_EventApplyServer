@@ -20,7 +20,7 @@ public class KafkaConsumerService {
     private final BookApplyDonationService bookApplyDonationService;
 
 
-    @KafkaListener(topics = "user-event-apply-input-topic", groupId = "user-event-apply-consumer-group",
+    @KafkaListener(topics = "user-event-apply-input-topic", groupId = "user-event-apply-consumer-group2",
     containerFactory = "kafkaListenerContainerFactory2")
     public void AdminUserEventApplyConsume2(String message) throws JsonProcessingException {
 //        System.out.println("Received Message in group 'test-consumer-group2': " + message);
