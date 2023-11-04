@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class KafkaProducerService {
     @Qualifier("kafkaTemplate1")
     private final KafkaTemplate<String,String> kafkaTemplate;
-
     public void sendMessage(String topic, String message){
         kafkaTemplate.send(topic,message);
     }
