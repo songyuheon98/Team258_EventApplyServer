@@ -16,6 +16,7 @@ public class RedissonConfig {
     @Value("${spring.redis.port}")
     private int redisPort;
 
+
     private static final String REDISSON_HOST_PREFIX = "redis://";
 
     @Bean
