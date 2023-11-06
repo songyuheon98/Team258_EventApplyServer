@@ -43,10 +43,10 @@ public class KafkaConsumerService {
 
         try {
             if (!lock.tryLock(3, 3, TimeUnit.SECONDS)) {
-                log.info("락 획득 실패");
+//                log.info("락 획득 실패");
                 throw new IllegalArgumentException("락 획득 실패");
             }
-            log.info("락 획득 성공");
+//            log.info("락 획득 성공");
 
             messageKafkaDto =new MessageKafkaDto(bookApplyDonationService.createBookApplyDonationKafka(kafkaDto.getBookApplyDonationRequestDto(),
                     kafkaDto.getUserId()), kafkaDto.getCorrelationId());
@@ -55,17 +55,13 @@ public class KafkaConsumerService {
             Thread.currentThread().interrupt();
             e.printStackTrace();
         } finally {
-            log.info("finally문 실행");
+//            log.info("finally문 실행");
             if (lock != null && lock.isLocked() && lock.isHeldByCurrentThread()) {
                 lock.unlock();
-                log.info("언락 실행");
+//                log.info("언락 실행");
             }
         }
-
-
-
         String jsonString = objectMapper.writeValueAsString(messageKafkaDto);
         producer.sendMessage("user-event-apply-output-topic", jsonString);
-
     }
 }
