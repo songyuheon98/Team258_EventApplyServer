@@ -74,6 +74,8 @@ dependencies {
 	// swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
+	// redisson
+	implementation 'org.redisson:redisson-spring-boot-starter:3.17.4'
 
 	// 231008 로깅 레벨 설정을 위한 의존성
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
@@ -93,6 +95,9 @@ dependencies {
 	// Kafka
 	implementation 'org.springframework.kafka:spring-kafka'
 	implementation 'org.apache.kafka:kafka-clients'
+
+	// redisson
+
 
 	// json Trouble Shooting
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.5'
