@@ -1,6 +1,5 @@
 package com.example.team258.kafka.entity;
 
-import com.example.team258.common.entity.Book;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

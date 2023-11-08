@@ -1,13 +1,10 @@
 package com.example.team258.kafka.repository;
 
-import com.example.team258.common.entity.BookCategory;
-import com.example.team258.common.entity.Book;
-import com.querydsl.core.BooleanBuilder;
+import com.example.team258.kafka.entity.BookCategory;
+import com.example.team258.kafka.entity.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

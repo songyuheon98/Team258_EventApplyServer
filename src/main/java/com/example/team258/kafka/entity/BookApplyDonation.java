@@ -1,13 +1,11 @@
 package com.example.team258.kafka.entity;
 
-import com.example.team258.domain.donation.dto.BookApplyDonationRequestDto;
-import com.example.team258.common.entity.Book;
+import com.example.team258.kafka.dto.BookApplyDonationRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 

@@ -1,7 +1,7 @@
 package com.example.team258.kafka.repository;
 
 
-import com.example.team258.common.entity.User;
+import com.example.team258.kafka.entity.User;
 import jakarta.persistence.QueryHint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

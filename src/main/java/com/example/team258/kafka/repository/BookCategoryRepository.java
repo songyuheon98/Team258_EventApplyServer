@@ -1,6 +1,6 @@
 package com.example.team258.kafka.repository;
 
-import com.example.team258.common.entity.BookCategory;
+import com.example.team258.kafka.entity.BookCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

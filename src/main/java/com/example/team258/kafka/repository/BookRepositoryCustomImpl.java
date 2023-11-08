@@ -1,8 +1,7 @@
 package com.example.team258.kafka.repository;
 
-import com.example.team258.common.entity.Book;
-import com.example.team258.common.entity.BookCategory;
-import com.example.team258.kafka.repository.BookRepositoryCustom;
+import com.example.team258.kafka.entity.Book;
+import com.example.team258.kafka.entity.BookCategory;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -14,7 +13,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import static com.example.team258.common.entity.QBook.book;
+import static com.example.team258.kafka.entity.QBook.book;
 
 
 @RequiredArgsConstructor

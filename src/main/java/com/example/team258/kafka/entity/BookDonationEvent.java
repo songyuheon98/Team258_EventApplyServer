@@ -1,7 +1,6 @@
 package com.example.team258.kafka.entity;
 
-import com.example.team258.domain.donation.dto.BookDonationEventRequestDto;
-import com.example.team258.common.entity.Book;
+import com.example.team258.kafka.dto.BookDonationEventRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

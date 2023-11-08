@@ -1,4 +1,4 @@
-//import com.example.team258.common.entity.User;
+//import com.example.team258.kafka.entity.User;
 //import com.example.team258.kafka.repository.UserRepository;
 //import com.example.team258.kafka.entity.BookApplyDonation;
 //import org.junit.jupiter.api.Test;

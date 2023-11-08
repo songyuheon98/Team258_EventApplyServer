@@ -1,9 +1,9 @@
 package com.example.team258.kafka.repository;
 
-import com.example.team258.common.entity.Book;
+import com.example.team258.kafka.entity.Book;
 import com.example.team258.kafka.entity.BookRent;
-import com.example.team258.common.entity.BookStatusEnum;
-import com.example.team258.common.entity.BookCategory;
+import com.example.team258.kafka.entity.BookStatusEnum;
+import com.example.team258.kafka.entity.BookCategory;
 
 import jakarta.persistence.LockModeType;
 

@@ -1,6 +1,5 @@
 package com.example.team258.kafka.dto;
 
-import com.example.team258.domain.donation.dto.BookApplyDonationRequestDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
