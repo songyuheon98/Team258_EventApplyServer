@@ -31,7 +31,6 @@ public class KafkaConsumerService {
     @KafkaListener(topics = "user-event-apply-input-topic", groupId = "user-event-apply-consumer-group${GROUP_ID}",
     containerFactory = "kafkaListenerContainerFactory2")
     public void AdminUserEventApplyConsume2(String message) throws JsonProcessingException {
-//        System.out.println("Received Message in group 'test-consumer-group2': " + message);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
@@ -43,10 +42,8 @@ public class KafkaConsumerService {
 
         try {
             if (!lock.tryLock(3, 3, TimeUnit.SECONDS)) {
-//                log.info("락 획득 실패");
                 throw new IllegalArgumentException("락 획득 실패");
             }
-//            log.info("락 획득 성공");
 
             messageKafkaDto =new MessageKafkaDto(bookApplyDonationService.createBookApplyDonationKafka(kafkaDto.getBookApplyDonationRequestDto(),
                     kafkaDto.getUserId()), kafkaDto.getCorrelationId());
@@ -55,10 +52,8 @@ public class KafkaConsumerService {
             Thread.currentThread().interrupt();
             e.printStackTrace();
         } finally {
-//            log.info("finally문 실행");
             if (lock != null && lock.isLocked() && lock.isHeldByCurrentThread()) {
                 lock.unlock();
-//                log.info("언락 실행");
             }
         }
         String jsonString = objectMapper.writeValueAsString(messageKafkaDto);

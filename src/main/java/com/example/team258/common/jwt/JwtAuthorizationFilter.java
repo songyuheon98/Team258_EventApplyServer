@@ -1,6 +1,5 @@
 package com.example.team258.common.jwt;
 
-import com.example.team258.common.exception.TokenNotValidException;
 import com.example.team258.common.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -40,7 +39,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             log.info(tokenValue);
 
             if (!jwtUtil.validateToken(tokenValue))
-                throw new TokenNotValidException("토큰이 유효하지 않습니다.");
+                throw new IllegalArgumentException("토큰이 유효하지 않습니다.");
 
 
             Claims info = jwtUtil.getUserInfoFromToken(tokenValue);

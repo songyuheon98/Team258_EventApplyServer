@@ -2,7 +2,6 @@ package com.example.team258.common.service;
 
 import com.example.team258.common.dto.MessageDto;
 import com.example.team258.common.entity.*;
-import com.example.team258.common.exception.DuplicateUsernameException;
 import com.example.team258.common.jwt.SecurityUtil;
 import com.example.team258.common.repository.UserRepository;
 import com.example.team258.domain.donation.entity.BookApplyDonation;
@@ -45,7 +44,7 @@ public class UserService {
         // username 중복 확인
         Optional<User> checkUsername = userRepository.findByUsername(username);
         if(checkUsername.isPresent()){
-            throw new DuplicateUsernameException("중복된 username 입니다.");
+            throw new IllegalArgumentException("중복된 username 입니다.");
         }
     }
 

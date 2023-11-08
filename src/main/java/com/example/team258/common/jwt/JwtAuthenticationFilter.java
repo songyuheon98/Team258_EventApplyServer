@@ -3,7 +3,6 @@ package com.example.team258.common.jwt;
 import com.example.team258.domain.member.dto.LoginRequestDto;
 import com.example.team258.common.dto.MessageDto;
 import com.example.team258.common.entity.UserRoleEnum;
-import com.example.team258.common.exception.UserNotFoundException;
 import com.example.team258.common.security.UserDetailsImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -76,6 +75,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("로그인 실패");
         response.setStatus(401);
         // 추가
-        throw new UserNotFoundException("회원을 찾을 수 없습니다.");
+        throw new IllegalArgumentException("회원을 찾을 수 없습니다.");
     }
 }
