@@ -1,4 +1,4 @@
-package com.example.team258.common.repository;
+package com.example.team258.kafka.repository;
 
 
 import com.example.team258.common.entity.User;

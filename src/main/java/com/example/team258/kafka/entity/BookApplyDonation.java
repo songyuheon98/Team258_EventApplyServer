@@ -1,4 +1,4 @@
-package com.example.team258.domain.donation.entity;
+package com.example.team258.kafka.entity;
 
 import com.example.team258.domain.donation.dto.BookApplyDonationRequestDto;
 import com.example.team258.common.entity.Book;

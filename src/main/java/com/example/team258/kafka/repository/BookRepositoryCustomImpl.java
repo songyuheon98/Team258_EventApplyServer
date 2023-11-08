@@ -1,7 +1,8 @@
-package com.example.team258.common.repository;
+package com.example.team258.kafka.repository;
 
 import com.example.team258.common.entity.Book;
 import com.example.team258.common.entity.BookCategory;
+import com.example.team258.kafka.repository.BookRepositoryCustom;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;

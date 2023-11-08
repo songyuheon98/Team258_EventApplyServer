@@ -1,10 +1,10 @@
 package com.example.team258.common.entity;
 
 import com.example.team258.domain.admin.dto.AdminBooksRequestDto;
-import com.example.team258.domain.donation.entity.BookApplyDonation;
-import com.example.team258.domain.donation.entity.BookDonationEvent;
-import com.example.team258.domain.user.entity.BookRent;
-import com.example.team258.domain.user.entity.BookReservation;
+import com.example.team258.kafka.entity.BookApplyDonation;
+import com.example.team258.kafka.entity.BookDonationEvent;
+import com.example.team258.kafka.entity.BookRent;
+import com.example.team258.kafka.entity.BookReservation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

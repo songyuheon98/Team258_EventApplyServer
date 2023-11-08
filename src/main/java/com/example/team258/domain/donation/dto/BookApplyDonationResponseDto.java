@@ -1,6 +1,6 @@
 package com.example.team258.domain.donation.dto;
 
-import com.example.team258.domain.donation.entity.BookApplyDonation;
+import com.example.team258.kafka.entity.BookApplyDonation;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

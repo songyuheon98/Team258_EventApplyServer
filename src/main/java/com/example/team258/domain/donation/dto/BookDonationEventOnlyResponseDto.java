@@ -1,7 +1,6 @@
 package com.example.team258.domain.donation.dto;
 
-import com.example.team258.domain.donation.entity.BookDonationEvent;
-import lombok.Builder;
+import com.example.team258.kafka.entity.BookDonationEvent;
 import lombok.Data;
 
 import java.time.LocalDateTime;

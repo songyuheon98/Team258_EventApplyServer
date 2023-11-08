@@ -1,6 +1,6 @@
 package com.example.team258.kafka;
 
-import com.example.team258.domain.donation.service.BookApplyDonationService;
+import com.example.team258.kafka.service.BookApplyDonationService;
 import com.example.team258.kafka.dto.MessageKafkaDto;
 import com.example.team258.kafka.dto.UserEventApplyKafkaDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.redisson.api.RedissonReactiveClient;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 

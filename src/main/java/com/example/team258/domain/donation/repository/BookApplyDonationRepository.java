@@ -1,6 +1,6 @@
 package com.example.team258.domain.donation.repository;
 
-import com.example.team258.domain.donation.entity.BookApplyDonation;
+import com.example.team258.kafka.entity.BookApplyDonation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookApplyDonationRepository extends JpaRepository<BookApplyDonation, Long> {

@@ -1,17 +1,14 @@
-package com.example.team258.common.repository;
+package com.example.team258.kafka.repository;
 
 import com.example.team258.common.entity.Book;
-import com.example.team258.domain.user.entity.BookRent;
+import com.example.team258.kafka.entity.BookRent;
 import com.example.team258.common.entity.BookStatusEnum;
 import com.example.team258.common.entity.BookCategory;
 
 import jakarta.persistence.LockModeType;
 
-import com.querydsl.core.BooleanBuilder;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;

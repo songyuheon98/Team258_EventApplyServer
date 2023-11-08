@@ -1,6 +1,6 @@
 package com.example.team258.domain.donation.repository;
 
-import com.example.team258.domain.donation.entity.BookDonationEvent;
+import com.example.team258.kafka.entity.BookDonationEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

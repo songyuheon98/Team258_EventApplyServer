@@ -1,15 +1,15 @@
-package com.example.team258.domain.donation.service;
+package com.example.team258.kafka.service;
 
 import com.example.team258.common.dto.MessageDto;
 import com.example.team258.common.entity.Book;
 import com.example.team258.common.entity.BookStatusEnum;
 import com.example.team258.common.entity.User;
-import com.example.team258.common.repository.BookRepository;
-import com.example.team258.common.repository.UserRepository;
+import com.example.team258.kafka.repository.BookRepository;
+import com.example.team258.kafka.repository.UserRepository;
 import com.example.team258.domain.donation.dto.BookApplyDonationRequestDto;
 import com.example.team258.domain.donation.dto.BookApplyDonationResponseDto;
-import com.example.team258.domain.donation.entity.BookApplyDonation;
-import com.example.team258.domain.donation.entity.BookDonationEvent;
+import com.example.team258.kafka.entity.BookApplyDonation;
+import com.example.team258.kafka.entity.BookDonationEvent;
 import com.example.team258.domain.donation.repository.BookApplyDonationRepository;
 import com.example.team258.domain.donation.repository.BookDonationEventRepository;
 
