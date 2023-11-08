@@ -1,7 +1,5 @@
 package com.example.team258.kafka;
 
-import com.example.team258.common.dto.MessageDto;
-import com.example.team258.common.service.UserService;
 import com.example.team258.domain.donation.service.BookApplyDonationService;
 import com.example.team258.kafka.dto.MessageKafkaDto;
 import com.example.team258.kafka.dto.UserEventApplyKafkaDto;
@@ -23,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @Slf4j
 public class KafkaConsumerService {
-    private final UserService userService;
     private final KafkaProducerService producer;
     private final BookApplyDonationService bookApplyDonationService;
     private final RedissonClient redissonClient;
